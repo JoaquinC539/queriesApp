@@ -1,2 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
-@import url('bootstrap/dist/css/bootstrap.min.css');
+.body{
+    background-color: rgb(51 46 46 / 6%)b;
+}
+.linkActive{
+    background-color: #ffa5005e !important;
+}
+.table-customstyle{
+    border-top: solid 1px #FA573A !important;
+    border-bottom: solid 1px #FA573A !important;
+    th{
+        color: #FA573A !important;
+        }
+}
