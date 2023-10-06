@@ -1,14 +1,28 @@
 /* You can add global styles to this file, and also import other style files */
-.body{
-    background-color: rgb(51 46 46 / 6%)b;
+html{
+    background: #f1f1f1;
 }
+.governance {
+    margin: 20px; 
+    padding: 20px; 
+    background-color: #ffffff; 
+    border: 1px solid #dddddd; 
+    border-radius: 5px; 
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+}
+
 .linkActive{
     background-color: #ffa5005e !important;
 }
 .table-customstyle{
     border-top: solid 1px #FA573A !important;
     border-bottom: solid 1px #FA573A !important;
+    font-weight: 330;
     th{
         color: #FA573A !important;
         }
 }
+.content-custom{
+    width: 85%;
+}
+

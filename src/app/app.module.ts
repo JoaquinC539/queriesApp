@@ -4,10 +4,12 @@ import { AppRoutingModule,routingComponents,routingWithProviders } from './app-r
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 
+
 @NgModule({
   declarations: [
     AppComponent,
     routingComponents,
+    
     
     
 

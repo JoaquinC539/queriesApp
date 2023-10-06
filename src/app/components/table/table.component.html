@@ -1,5 +1,5 @@
 <div class="table-responsive">
-    <table class="table table-xs table-hover mb-0 table-customstyle table-striped">
+    <table class="table table-striped table-customstyle">
         <thead class="thead">
             <tr>
                 <ng-container *ngFor="let column of tableColumns">
@@ -15,11 +15,13 @@
         </div>
         </div>
         <ng-template #elseBlock>
-           <tr *ngFor="let row of tableCellData">
-            <td *ngFor="let cell of row" class="text-truncate text-center">
-                {{cell}}
-            </td>
-           </tr>
+            <tbody>
+                <tr *ngFor="let row of tableCellData" class="">
+                    <td *ngFor="let cell of row" class="text-truncate text-center">
+                        {{cell}}
+                    </td>
+                </tr>
+            </tbody>
         </ng-template>
     </table>
 </div>

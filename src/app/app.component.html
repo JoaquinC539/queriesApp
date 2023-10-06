@@ -1,43 +1,44 @@
-<div class="content-wrapper body">
-    <div class="content-body">
-        <div class="card">
-            <div class="card-content collapse-show">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-sm-12 col-md-12">
-                            <div class="d-flex justify-content-center">
-                                <app-title-bar></app-title-bar>
-                                <!-- <h1 class="text-primary-emphasis" [routerLink]="['index']" style="cursor: pointer;" >{{headerTitle}}</h1> -->
+<main class="vertical-layout vertical-menu 2-columns governance">
+    <div class="app-content content">
+        <div class="content-wrapper">
+            <div class="content-body">
+                <div class="card">
+                    <div class="card-content collapse-show">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-12 col-md-12">
+                                    <div class="d-flex justify-content-center">
+                                        <app-title-bar></app-title-bar>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <br>
+            <div class="content-body">
+                <div class="col-12">
+                    <ul class="nav nav-tabs nav-linetriangle nav-justified tab-cards-dilm">
+                        <li class="nav-item">
+                            <a class="nav-link" [routerLink]="['/index']" [routerLinkActive]="['linkActive']">Dashboard</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Placeholder</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" [routerLink]="['/facturas']" [routerLinkActive]="['linkActive']">Facturas</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Placeholder</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Placeholder</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>     
+            <router-outlet></router-outlet>
         </div>
     </div>
-    <br>
-    <div class="content-body">
-        <div class="col-12">
-            <ul class="nav nav-tabs nav-linetriangle nav-justified tab-cards-dilm">
-                <li class="nav-item">
-                    <a class="nav-link" [routerLink]="['/index']" [routerLinkActive]="['linkActive']">Dashboard</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Placeholder</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" [routerLink]="['/facturas']" [routerLinkActive]="['linkActive']">Facturas</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Placeholder</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Placeholder</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-    
-    
-    <router-outlet></router-outlet>
-</div>
+</main>

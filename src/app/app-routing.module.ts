@@ -5,6 +5,7 @@ import { FacturasComponent } from './components/facturas/facturas.component';
 import { TitleBarComponent } from './components/title-bar/title-bar.component';
 import { RequestService } from './services/request.service';
 import { TableComponent } from './components/table/table.component';
+import { PaginatorComponent } from './components/paginator/paginator.component';
 
 
 const routes: Routes = [
@@ -19,5 +20,5 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
-export const routingComponents:Array<any>=[DashboardComponent,FacturasComponent,TitleBarComponent,TableComponent];
+export const routingComponents:Array<any>=[DashboardComponent,FacturasComponent,TitleBarComponent,TableComponent,PaginatorComponent];
 export const routingWithProviders:Array<any>=[RequestService];
