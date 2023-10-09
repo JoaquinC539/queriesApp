@@ -9,11 +9,18 @@ import { environment } from 'src/environments/environment';
 })
 export class RequestService {
   private url:string=environment.apiUrl
-  constructor(public _http:HttpClient) {
+  constructor(private _http:HttpClient) {
 
    }
-   public getFacturasIndex(){
-    return this._http.get(`${this.url}/factura`);
+   public getFacturasIndex(route:string,params?:{[key:string]:string}):Observable<any>{
+    
+    if(params){
+      const queryParams=new URLSearchParams(params)
+      return this._http.get(`${this.url}/${route}?${queryParams}`);
+    }else{
+      return this._http.get(`${this.url}/${route}`);
+    }
+   
    }
 
 }
