@@ -3,13 +3,17 @@
         <div class="card">
             <div class="card-content collapse-show">
                 <div class="card-body">
-
                     <form>
                         <div class="row">
                         </div>
                     </form>
-                    <app-table/>
-                    <app-paginator/>
+                    <div class="row">
+                        <app-list/>
+                    </div>
+                    <div class="row">
+                        <app-export-csv [endpoint]="endpoint" [params]="params"/>
+                    </div>
+                    
                 </div>
             </div>
         </div>

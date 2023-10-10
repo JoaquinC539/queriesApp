@@ -71,12 +71,28 @@ export class PaginatorComponent implements OnInit,OnDestroy{
         tabsToShow.push(i)
       }
       tabsToShow.push(-1)
+      tabsToShow.push(this.paginatorTabs.length-1)
+    }else if(this.paginatorCurrentPage===this.paginatorTabs.length-1){
+      tabsToShow.push(1);
+      tabsToShow.push(-1);
+      for(let i=this.paginatorCurrentPage-this.tabsPerPage-1;i<=this.paginatorCurrentPage;i++){
+        tabsToShow.push(i);
+      }
+    }else if(this.paginatorCurrentPage>=3){
+      tabsToShow.push(1);
+      tabsToShow.push(-1);
+      for(let i=this.paginatorCurrentPage;i<=this.paginatorCurrentPage+this.tabsPerPage-2;i++){
+        tabsToShow.push(i);
+      }
+      tabsToShow.push(-1);
+      tabsToShow.push(this.paginatorTabs.length-1)
     }else{
       tabsToShow.push(this.paginatorCurrentPage-1)
       for(let i=this.paginatorCurrentPage;i<=this.paginatorCurrentPage+this.tabsPerPage-1;i++){
         tabsToShow.push(i);
       }
       tabsToShow.push(-1);
+      tabsToShow.push(this.paginatorTabs.length-1)
     }
     return tabsToShow;
   }
@@ -84,9 +100,11 @@ export class PaginatorComponent implements OnInit,OnDestroy{
     const offset:number=page*this.max-this.max;
     console.log(offset)
     this.paginatorCurrentPage=page;
-
     this.emitChange(undefined,offset)
-
+  }
+  maxChange():void{
+    this.paginatorParams['max']=this.max;
+    this.emitChange()
   }
   
 

@@ -36,6 +36,7 @@ export class TableComponent implements OnDestroy,OnInit{
       this.loading=false;
       this.tableColumns=Object.keys(data[0]);
       const parsedData:Array<any>=this._parse.parseObjectTable(data[0],data[1],data[2]);
+      console.log
       this.tableCellData=parsedData;
       this._data.changeEmitter.pipe(takeUntil(this.destroy$)).subscribe((change)=>{
         if(change){
