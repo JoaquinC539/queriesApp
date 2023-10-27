@@ -9,6 +9,7 @@ import { PaginatorComponent } from './components/paginator/paginator.component';
 import { ListComponent } from './components/list/list.component';
 import { ExportCSVComponent } from './components/export-csv/export-csv.component';
 import { AlmacenComponent } from './components/almacen/almacen.component';
+import { PedidosComponent } from './components/pedidos/pedidos.component';
 
 
 const routes: Routes = [
@@ -16,7 +17,8 @@ const routes: Routes = [
   {path:'',component:DashboardComponent},
   {path:'index',component:DashboardComponent},
   {path:'facturas',component:FacturasComponent},
-  {path:'almacen',component:AlmacenComponent}
+  {path:'almacen',component:AlmacenComponent},
+  {path:'pedidos',component:PedidosComponent}
 ];
 
 @NgModule({
@@ -25,5 +27,5 @@ const routes: Routes = [
 })
 export class AppRoutingModule { }
 export const routingComponents:Array<any>=[DashboardComponent,FacturasComponent,
-  TitleBarComponent,TableComponent,PaginatorComponent,ListComponent,ExportCSVComponent,AlmacenComponent];
+  TitleBarComponent,TableComponent,PaginatorComponent,ListComponent,ExportCSVComponent,AlmacenComponent,PedidosComponent];
 export const routingWithProviders:Array<any>=[RequestService];

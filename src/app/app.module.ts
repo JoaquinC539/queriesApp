@@ -8,10 +8,12 @@ import {ReactiveFormsModule} from '@angular/forms';
 import { FileSaverModule } from 'ngx-filesaver';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
     routingComponents,
+   
 
   ],
   imports: [
