@@ -20,6 +20,7 @@
             "outputPath": "dist/queries-app",
             "index": "src/index.html",
             "main": "src/main.ts",
+            "allowedCommonJsDependencies": ["file-saver"],
             "polyfills": [
               "zone.js"
             ],

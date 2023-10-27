@@ -1,4 +1,4 @@
-import { Component,OnInit,OnDestroy,Input, EventEmitter } from '@angular/core';
+import { Component,OnInit,OnDestroy,Input } from '@angular/core';
 import { Observable, Subject, takeUntil, lastValueFrom} from 'rxjs';
 import { AsyncDataService } from 'src/app/services/async-data.service';
 import { RequestService } from 'src/app/services/request.service';
@@ -10,11 +10,11 @@ import { TitleService } from 'src/app/services/title-service.service';
   styleUrls: ['./facturas.component.scss']
 })
 export class FacturasComponent implements OnInit,OnDestroy {
-  public facturas:any;
+  public facturas:Array<{[key:string]:any}>;
   public count:number=0;
   public facturasColumnsMap:{[key:string]:string}
   public facturasData:Array<any>=[]
-  public endpoint:string='factura'
+  public endpoint:string='/factura'
   @Input() public fetchData:Observable<any>
   
   private destroy$=new Subject<void>();
@@ -22,7 +22,8 @@ export class FacturasComponent implements OnInit,OnDestroy {
   
   constructor(private titleService:TitleService,private _httpService:RequestService,
     private _dataService:AsyncDataService) {
-    this.fetchData=this._httpService.getListIndex('/factura')
+      this.facturas=[];
+    this.fetchData=this._httpService.getListIndex(this.endpoint)
     this.titleService.setTitle("Facturas","facturas");
     this.params={}
     this.facturasColumnsMap={

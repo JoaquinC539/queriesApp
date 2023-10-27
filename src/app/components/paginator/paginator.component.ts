@@ -39,10 +39,10 @@ export class PaginatorComponent implements OnInit,OnDestroy{
    .pipe(takeUntil(this.destroy$))
    .subscribe((data:any)=>{
     this.data=data[3];
-    this.max=this.data['documentsLength'];
+    // this.max=this.data['documentsLength'];
     this.count=this.data['count'];
     this.remainingDocuments=this.count-this.max;
-    const numberTabs:number=Math.ceil(this.remainingDocuments/this.max);
+    const numberTabs:number=Math.ceil(this.count/this.max);
     this.paginatorTabs = Array.from({ length: numberTabs }, (_, i) => i + 1);
    }); 
   }
@@ -67,41 +67,79 @@ export class PaginatorComponent implements OnInit,OnDestroy{
   get displayedTabs():number[]{
     const tabsToShow:number[]=[];
     if(this.paginatorCurrentPage===1){
-      for(let i=1;i<=this.tabsPerPage;i++){
-        tabsToShow.push(i)
+      if(this.tabsPerPage>this.paginatorTabs.length){
+        for(let i=1;i<=this.paginatorTabs.length;i++){
+          tabsToShow.push(i)
+        }
+      }else{
+        for(let i=1;i<=this.tabsPerPage;i++){
+          tabsToShow.push(i)
+        }
+        tabsToShow.push(-1)
+        tabsToShow.push(this.paginatorTabs.length)
       }
-      tabsToShow.push(-1)
-      tabsToShow.push(this.paginatorTabs.length-1)
-    }else if(this.paginatorCurrentPage===this.paginatorTabs.length-1){
+      
+    }else if(this.paginatorCurrentPage===this.paginatorTabs.length){
+      if(this.paginatorTabs.length>=this.tabsPerPage){
+        tabsToShow.push(1);
+        tabsToShow.push(-1);
+        for(let i=this.paginatorCurrentPage-this.tabsPerPage-1;i<=this.paginatorCurrentPage;i++){
+        tabsToShow.push(i);
+        }
+      }else{
+        for(let i=1;i<this.paginatorTabs.length+1;i++){
+          tabsToShow.push(i)
+        }
+      }
+    }
+    else if(this.paginatorCurrentPage>=2){
       tabsToShow.push(1);
       tabsToShow.push(-1);
-      for(let i=this.paginatorCurrentPage-this.tabsPerPage-1;i<=this.paginatorCurrentPage;i++){
-        tabsToShow.push(i);
+      if(this.paginatorTabs.length-this.paginatorCurrentPage>3){
+        for(let i=this.paginatorCurrentPage;i<=this.paginatorCurrentPage+this.tabsPerPage-1;i++){
+          tabsToShow.push(i);
+        }
+        tabsToShow.push(-1);
+        tabsToShow.push(this.paginatorTabs.length)
+      }else{
+        for(let i=this.paginatorCurrentPage;i<=this.paginatorTabs.length;i++){
+          tabsToShow.push(i);
+        }
       }
-    }else if(this.paginatorCurrentPage>=3){
-      tabsToShow.push(1);
-      tabsToShow.push(-1);
-      for(let i=this.paginatorCurrentPage;i<=this.paginatorCurrentPage+this.tabsPerPage-2;i++){
-        tabsToShow.push(i);
-      }
-      tabsToShow.push(-1);
-      tabsToShow.push(this.paginatorTabs.length-1)
-    }else{
+      
+    }
+    else{
       tabsToShow.push(this.paginatorCurrentPage-1)
-      for(let i=this.paginatorCurrentPage;i<=this.paginatorCurrentPage+this.tabsPerPage-1;i++){
+      for(let i=this.paginatorCurrentPage;i<=this.paginatorCurrentPage+this.tabsPerPage;i++){
         tabsToShow.push(i);
       }
       tabsToShow.push(-1);
-      tabsToShow.push(this.paginatorTabs.length-1)
+      tabsToShow.push(this.paginatorTabs.length)
     }
     return tabsToShow;
   }
   changePage(page:number):void{
     const offset:number=page*this.max-this.max;
-    console.log(offset)
     this.paginatorCurrentPage=page;
     this.emitChange(undefined,offset)
   }
+  prev():void{
+    const page=this.paginatorCurrentPage-1;
+    const offset:number=page*this.max-this.max;
+    this.paginatorCurrentPage=page;
+    this.emitChange(undefined,offset)
+  }
+  next():void{
+    const page=this.paginatorCurrentPage+1;
+    if(page<this.paginatorTabs.length){
+      const offset:number=page*this.max-this.max;
+    this.paginatorCurrentPage=page;
+    this.emitChange(undefined,offset)
+    }
+    
+
+  }
+  
   maxChange():void{
     this.paginatorParams['max']=this.max;
     this.emitChange()
