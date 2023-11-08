@@ -41,27 +41,24 @@ export class PedidosComponent implements OnInit,OnDestroy {
   }
   public async index(){
     this.Fetch();
-    await this._dataService.paginatorEmitter
-    .pipe(takeUntil(this.destroy$))
-    .subscribe((data)=>{
-      this.params=data;
-        this.Fetch();
-      });
+   
   }
 
   public async Fetch(){
-    this._dataService.passChange();
+    
     const source= this._request.getListIndex(this.endpoint,this.params);
     const data= await lastValueFrom(source);
     this.pedidos=data[0].results ? data[0].results : [];
-    console.log(this.pedidos[0]['tienda'])
     for(let i=0;i<this.pedidos.length;i++){
       this.pedidos[i]['tienda']= this.pedidos[i]['tienda']['tienda']
     }
     this.count=data[0].count[0] ? data[0].count[0].count :0;
-    await this._dataService.passListAsyncData([this.pedidosColumnsMap,this.pedidos,{total:this._formatter.formatNumber,
-      totalMXN:this._formatter.formatNumber,tipoCambio:this._formatter.tipoNumero},
-      {documentsLength:this.pedidos.length,count:this.count}]);
+    this._dataService.passListAsyncData({
+      columnMap: this.pedidosColumnsMap,
+      data: this.pedidos,
+      count: 0,
+      params: this.params
+    });
   }
 
 }

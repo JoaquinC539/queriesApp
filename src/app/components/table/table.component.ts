@@ -2,6 +2,7 @@ import { Component,OnInit,OnDestroy} from '@angular/core';
 import { Subject, takeUntil } from 'rxjs';
 import { AsyncDataService } from 'src/app/services/async-data.service';
 import { ParseService } from 'src/app/services/parse.service';
+import { StoreList, StoreService } from 'src/app/services/store.service';
 
 
 @Component({
@@ -15,7 +16,7 @@ export class TableComponent implements OnDestroy,OnInit{
   public loading:boolean=true;
   private destroy$=new Subject<void>();
   
-  constructor(private _parse:ParseService,private _data:AsyncDataService){
+  constructor(private _parse:ParseService,private _data:AsyncDataService,private _store:StoreService){
     this.tableCellData=[];
     this.tableColumns=[];
   }
@@ -32,21 +33,10 @@ export class TableComponent implements OnDestroy,OnInit{
     this.loading=true;
     this._data.emitterDataList
     .pipe(takeUntil(this.destroy$))
-    .subscribe((data:any)=>{
+    .subscribe((data:StoreList)=>{
       this.loading=false;
-      this.tableColumns=Object.keys(data[0]);
-      const parsedData:Array<any>=this._parse.parseObjectTable(data[0],data[1],data[2]);
-      console.log
+      const parsedData:Array<any>=this._parse.parseObjectTable(data.columnMap,data.data,data.formatter);
       this.tableCellData=parsedData;
-      this._data.changeEmitter.pipe(takeUntil(this.destroy$)).subscribe((change)=>{
-        if(change){
-          this.tableCellData=[];
-          this.tableColumns=[];
-          this.loading=true;
-          this.loadData();
-        }
-      })
-      
     });
     
   }

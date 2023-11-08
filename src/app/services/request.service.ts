@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from'@angular/common/http';
 import {Observable} from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { FileSaverService } from 'ngx-filesaver/src/filesaver.service';
 
 
 @Injectable({
@@ -21,6 +20,7 @@ export class RequestService {
       return this._http.get(`${this.url}/${route}`);
     }
    }
+   
 
    public getIndexExport(route:string,params?:{[key:string]:string}){
     const queryParams=new URLSearchParams(params);
@@ -32,6 +32,15 @@ export class RequestService {
     const queryParams=new URLSearchParams(params)
     exportURL=`${this.url}/${route}?export=true&${queryParams}`
     return exportURL
+   }
+
+   public post(route:string,data:{[key:string]:any},options?:{[key:string]:any}):Observable<any>{
+    if(options){
+      return this._http.post(`${this.url}/${route}`,data,options)
+    }else{
+      return this._http.post(`${this.url}/${route}`,data)
+    }
+    
    }
 
 }

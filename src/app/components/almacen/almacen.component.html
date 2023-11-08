@@ -1,12 +1,57 @@
 <div class="row">
     <div class="col-12">
         <div class="card">
+            
+            <div class="card-header">
+                <app-create-button [text]="'Almacén'" [link]="'create'"/>
+            </div>
             <div class="card-content collapse-show">
                 <div class="card-body">
-                    <form>
-                        <div class="row">
-                        </div>
-                    </form>
+                    <div class="row">
+                        <form [formGroup]="filters">
+                            <div class="row">
+                                <div class="col-12 inputsForm">
+                                    <div class="row">
+                                        <div class="col-sm-12 col-md-3">
+                                            <fieldset>
+                                                <label for="id" class="form-label">Id</label><br>
+                                                <input type="text" id="id" formControlName="id" class="form-control input">
+                                            </fieldset>
+                                        </div>
+
+                                        <div class="col-sm-12 col-md-4">
+                                            <fieldset>
+                                                <label for="nombre" class="form-label">Nombre</label><br>
+                                                <input type="text" id="nombre" formControlName="nombre" class="form-control input">
+                                            </fieldset>
+                                        </div>
+
+                                        <div class="col-sm-12 col-md-3">
+                                            <br>
+                                            <fieldset>
+                                                <input type="checkbox" id="activo" formControlName="activo" class="btn-check ">
+                                                <label for="activo" class="btn btn-outline-primary">Ver todos</label>
+                                            </fieldset>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 text-right mt-2 buttonsForm">
+                                    <a (click)="filtrar()"  style="cursor: pointer;" type="submit" class="btn btn-primary pull-right font-custom mt-1" >
+                                        <!-- <button type="button" class="btn btn-primary pull-right font-custom"> -->
+                                            <i class="fa fa-search font-custom"> <span style="font-family: sans-serif;"> Filtrar</span></i>
+                                        <!-- </button> -->
+                                    </a>
+                                    <a  type="button" class="btn btn-danger pull-right font-custom m-1" (click)="removerFiltros()">
+                                        <i class="fa fa-close font-custom"> <span style="font-family: sans-serif;"> Remover Filtros</span></i>
+                                    </a>
+
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <br>
                     <div class="row">
                         <app-list/>
                     </div>

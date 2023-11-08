@@ -1,4 +1,6 @@
 import { EventEmitter, Injectable } from '@angular/core';
+import { StoreList } from './store.service';
+import { Subject } from 'rxjs';
 
 interface ColumnMap{
   [key:string]:string;
@@ -18,19 +20,20 @@ interface PaginatorData{
 })
 export class AsyncDataService {
   public emitterDataList=new EventEmitter<any>();
-  public paginatorEmitter=new EventEmitter<any>();
   public changeEmitter=new EventEmitter<boolean>();
+  public destroy$=new Subject<void>()
+  public filterEmitter=new EventEmitter<boolean>();
   constructor() { }
   
-  public passListAsyncData(data:[ColumnMap,DataItem[],FormatterMap,PaginatorData]){
+  public passListAsyncData(data:StoreList){
     this.emitterDataList.emit(data)
   }
-  public passReQueryPaginator(data:{[key:string]:number}){
-    this.paginatorEmitter.emit(data);
-  }
-  public passChange(){
-    this.changeEmitter.emit(true)
-    this.changeEmitter.emit(false)
+  
+  public passChange(value:boolean){
+    this.changeEmitter.emit(value)
   } 
+  public passFilter(value:boolean){
+    this.filterEmitter.emit(value)
+  }
   
 }

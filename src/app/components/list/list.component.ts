@@ -1,4 +1,5 @@
-import { Component,Input } from '@angular/core';
+import { Component,OnInit } from '@angular/core';
+import { AsyncDataService } from 'src/app/services/async-data.service';
 
 
 
@@ -7,11 +8,13 @@ import { Component,Input } from '@angular/core';
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss']
 })
-export class ListComponent {
-  
-  constructor() {
+export class ListComponent implements OnInit {
+  documents:any[]=[];
+  constructor(private _data:AsyncDataService) {
+    }
+    
+    ngOnInit(): void {
       
     }
-
     
 }

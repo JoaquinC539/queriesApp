@@ -12,14 +12,14 @@ export class ParseService {
     
   }
   public parseObjectTable(columnsMap:{[key:string]:string},data:{[key:string]:any}[],formatter?:{[key:string]:any}){
+    const objectKeys=Object.keys(columnsMap);
     const rows:Array<Array<any>>=[];
     for(let i:number=0;i<data.length;i++){
       const dataArray:Array<any>=[];
-      const objectKeys=Object.keys(columnsMap);
       for(let k=0;k<objectKeys.length;k++){
         const key:string=objectKeys[k];
-        const valueKey=columnsMap[key]
-        let value:string | number | boolean=data[i][valueKey] ? data[i][valueKey]:columnsMap[key];
+        const valueKey=columnsMap[key];
+        let value:string | number | boolean=data[i][valueKey]!==undefined ? data[i][valueKey]:columnsMap[key];
         if(formatter){
           if(formatter[valueKey]){
             const formatFunction=formatter[valueKey];

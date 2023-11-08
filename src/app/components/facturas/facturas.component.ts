@@ -51,23 +51,17 @@ export class FacturasComponent implements OnInit,OnDestroy {
   }
   public async index(){
     this.Fetch();
-    await this._dataService.paginatorEmitter
-    .pipe(takeUntil(this.destroy$))
-    .subscribe((data)=>{
-      this.params=data;
-        this.Fetch();
-      });
+    
   }
 
   public async Fetch(){
-    this._dataService.passChange();
+    
     const source= this._httpService.getListIndex(this.endpoint,this.params);
     const data= await lastValueFrom(source);
     const formatters={fecha:this.formatDate,total:this.formatNumber};
     this.facturas=data[0].results ? data[0].results : [] ;
     this.count=data[0].count[0] ? data[0].count[0].count :0;
-    await this._dataService.passListAsyncData([this.facturasColumnsMap,this.facturas,formatters
-      ,{documentsLength:this.facturas.length,count:this.count}]);
+    await this._dataService.passListAsyncData({columnMap:this.facturasColumnsMap,data:this.facturas,count:this.count,params:this.params,formatter:formatters});
   }
 
   public formatDate(date:Date | string){
@@ -82,6 +76,9 @@ export class FacturasComponent implements OnInit,OnDestroy {
       return '';
     }
     return '$' + value.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+  }
+  public documentChange(algo:any){
+    console.log(algo)
   }
 
   
