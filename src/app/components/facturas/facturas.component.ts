@@ -1,7 +1,10 @@
-import { Component,OnInit,OnDestroy,Input } from '@angular/core';
-import { Observable, Subject, takeUntil, lastValueFrom} from 'rxjs';
+import { Component } from '@angular/core';
+import { FormGroup } from '@angular/forms';
+import { BaseListComponent } from 'src/app/class/BaseListComponent';
 import { AsyncDataService } from 'src/app/services/async-data.service';
+import { FormatterService } from 'src/app/services/formatter.service';
 import { RequestService } from 'src/app/services/request.service';
+import { StoreService } from 'src/app/services/store.service';
 import { TitleService } from 'src/app/services/title-service.service';
 
 @Component({
@@ -9,80 +12,31 @@ import { TitleService } from 'src/app/services/title-service.service';
   templateUrl: './facturas.component.html',
   styleUrls: ['./facturas.component.scss']
 })
-export class FacturasComponent implements OnInit,OnDestroy {
-  public facturas:Array<{[key:string]:any}>;
-  public count:number=0;
-  public facturasColumnsMap:{[key:string]:string}
-  public facturasData:Array<any>=[]
-  public endpoint:string='/factura'
-  @Input() public fetchData:Observable<any>
+export class FacturasComponent extends BaseListComponent {
+  public columnMap:{[key:string]:string}={
+    "Id":'_id',
+    "Cliente":'cliente',
+    "Estatus":'estatus',
+    "Tipo":'tipo',
+    "Serie":'serie',
+    "Folio":'folio',
+    "Fecha":'fecha',
+    "Razón Social":'razonSocial',
+    "Forma de Pago":'formaDePago',
+    "Moneda":"moneda",
+    "Tienda":'tienda',
+    "Total":'total'
+  }
+  public endpoint:string='/factura';
+  public titles={title:'Factura',link:'factura'}
+  public filters:FormGroup=new FormGroup({});
+  public formatters:{[key:string]:Function}={};
   
-  private destroy$=new Subject<void>();
-  public params:{[key:string]:any}
-  
-  constructor(private titleService:TitleService,private _httpService:RequestService,
-    private _dataService:AsyncDataService) {
-      this.facturas=[];
-    this.fetchData=this._httpService.getListIndex(this.endpoint)
-    this.titleService.setTitle("Facturas","facturas");
-    this.params={}
-    this.facturasColumnsMap={
-      "Id":'_id',
-      "Cliente":'cliente',
-      "Estatus":'estatus',
-      "Tipo":'tipo',
-      "Serie":'serie',
-      "Folio":'folio',
-      "Fecha":'fecha',
-      "Razón Social":'razonSocial',
-      "Forma de Pago":'formaDePago',
-      "Moneda":"moneda",
-      "Tienda":'tienda',
-      "Total":'total'
-    }
+  constructor(_request: RequestService, _data: AsyncDataService,
+    _formatter: FormatterService, _store: StoreService,_title: TitleService) {
+      super(_request,_data,_store,_title);
+    this.formatters={total:_formatter.formatCurrency,fecha:_formatter.formatDate}
   }
-  ngOnDestroy(): void {
-    this.destroy$.next();
-    this.destroy$.complete();
-  }  
-
-  ngOnInit():void{
-    this.index();
-  }
-  public async index(){
-    this.Fetch();
-    
-  }
-
-  public async Fetch(){
-    
-    const source= this._httpService.getListIndex(this.endpoint,this.params);
-    const data= await lastValueFrom(source);
-    const formatters={fecha:this.formatDate,total:this.formatNumber};
-    this.facturas=data[0].results ? data[0].results : [] ;
-    this.count=data[0].count[0] ? data[0].count[0].count :0;
-    await this._dataService.passListAsyncData({columnMap:this.facturasColumnsMap,data:this.facturas,count:this.count,params:this.params,formatter:formatters});
-  }
-
-  public formatDate(date:Date | string){
-    let datejs=new Date(date);
-        return datejs.toLocaleDateString("es-MX");
-  }
-  public formatNumber(value:number | string):string{
-    if (typeof value === 'string') {
-      value = parseFloat(value);
-    }
-    if (isNaN(value)) {
-      return '';
-    }
-    return '$' + value.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
-  }
-  public documentChange(algo:any){
-    console.log(algo)
-  }
-
-  
-
   
 
 }

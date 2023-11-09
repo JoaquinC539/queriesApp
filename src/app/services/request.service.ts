@@ -12,7 +12,7 @@ export class RequestService {
   constructor(private _http:HttpClient) {
 
    }
-   public getListIndex(route:string,params?:{[key:string]:string}):Observable<any>{
+   public index(route:string,params?:{[key:string]:string}):Observable<any>{
     if(params){
       const queryParams=new URLSearchParams(params)
       return this._http.get(`${this.url}/${route}?${queryParams}`);
@@ -22,7 +22,7 @@ export class RequestService {
    }
    
 
-   public getIndexExport(route:string,params?:{[key:string]:string}){
+   public indexExport(route:string,params?:{[key:string]:string}){
     const queryParams=new URLSearchParams(params);
     return this._http.get(`${this.url}/${route}?${queryParams}`,{responseType:'text'})
    }

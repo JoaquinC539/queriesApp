@@ -5,6 +5,7 @@ import { FormControl,FormGroup} from '@angular/forms';
 import { FormatterService } from 'src/app/services/formatter.service';
 import { StoreService } from 'src/app/services/store.service';
 import { BaseListComponent } from 'src/app/class/BaseListComponent';
+import { TitleService } from 'src/app/services/title-service.service';
 
 @Component({
   selector: 'app-almacen',
@@ -19,15 +20,18 @@ export class AlmacenComponent extends BaseListComponent {
         'Nombre': 'nombre',
         'Activo': 'activo'
   };
+  public titles={title:'Almacén',link:'almacen'}
   public filters:FormGroup=new FormGroup({
     id:new FormControl(''),
     nombre:new FormControl(''),
     activo:new FormControl('')
   });
+  public formatters:{[key:string]:Function};
 
   constructor(_request: RequestService, _data: AsyncDataService,
-    _formatter: FormatterService, _store: StoreService) {
-      super(_request,_data,_formatter,_store)
+    _formatter: FormatterService, _store: StoreService,_title: TitleService) {
+      super(_request,_data,_store,_title);
+      this.formatters={activo:_formatter.activos}
   }
   
 }

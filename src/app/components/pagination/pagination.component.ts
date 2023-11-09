@@ -1,5 +1,6 @@
-import { Component, Input,OnInit,OnDestroy,ChangeDetectorRef, OnChanges } from '@angular/core';
-import { of } from 'rxjs';
+import { Component, Input,OnInit,OnDestroy, OnChanges } from '@angular/core';
+import { Subject } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
 import { AsyncDataService } from 'src/app/services/async-data.service';
 import { StoreList, StoreService } from 'src/app/services/store.service';
 
@@ -27,8 +28,12 @@ export class PaginationComponent implements OnInit,OnDestroy,OnChanges{
   params:Params={};
   documentsPerPage:number=15;
   offset:number=0;
+  documentsPerPageChange=new Subject<number>();
   
   constructor(private _data:AsyncDataService, private _store:StoreService){
+    this.documentsPerPageChange.pipe(debounceTime(1000)).subscribe(newValue=>{
+      this.updateDocumentsPerPage(newValue)
+    })
   }
 
   ngOnInit(): void {
@@ -62,6 +67,12 @@ export class PaginationComponent implements OnInit,OnDestroy,OnChanges{
     return offset
   }
   onDocumentsPerPageChange(newDocumentsPerPage: number) {
+    this.documentsPerPageChange.next(newDocumentsPerPage);
+  }
+  updateDocumentsPerPage(newDocumentsPerPage:number):void{
+    if(newDocumentsPerPage===0 || newDocumentsPerPage===null || newDocumentsPerPage===undefined){
+      newDocumentsPerPage=1;
+    }
     this.documentsPerPage = newDocumentsPerPage;
     this.offset = this.calculateOffset(this.documentsPerPage, this.page);
     this._store.storeListData.params['max'] = this.documentsPerPage;
@@ -73,6 +84,7 @@ export class PaginationComponent implements OnInit,OnDestroy,OnChanges{
     this._store.storeListData.params['offset'] = this.calculateOffset(this.documentsPerPage, this.page);
     this._data.passChange(true)
   }
+  
 
   
   

@@ -22,6 +22,11 @@ export class TableComponent implements OnDestroy,OnInit{
   }
    ngOnInit():void{
     this.loadData();
+    this._data.changeEmitter.subscribe((change:boolean)=>{
+      if(change){
+        this.loading=true;
+      }
+    })
   }
 
   ngOnDestroy(): void {
@@ -35,6 +40,7 @@ export class TableComponent implements OnDestroy,OnInit{
     .pipe(takeUntil(this.destroy$))
     .subscribe((data:StoreList)=>{
       this.loading=false;
+      this.tableColumns=Object.keys(data.columnMap)
       const parsedData:Array<any>=this._parse.parseObjectTable(data.columnMap,data.data,data.formatter);
       this.tableCellData=parsedData;
     });

@@ -22,7 +22,8 @@ export interface StoreList{
   data:Array<Object>,
   count:number,
   params:Params,
-  formatter?:FormatterMap
+  formatter?:FormatterMap,
+  endpoint:string
 }
 
 
@@ -31,6 +32,11 @@ export interface StoreList{
   providedIn: 'root'
 })
 export class StoreService {
-  public storeListData:StoreList={columnMap:{},data:[{}],count:0,params:{}};
+  public storeListData:StoreList={
+    columnMap:{},
+    data:[{}],
+    count:0,
+    params:{},
+    endpoint:''};
   constructor() { }
 }

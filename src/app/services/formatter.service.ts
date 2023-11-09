@@ -16,7 +16,7 @@ export class FormatterService {
     let datejs=new Date(date);
         return datejs.toLocaleDateString("es-MX");
   }
-  public formatNumber(value:number | string):string{
+  public formatCurrency(value:number | string):string{
     if (typeof value === 'string') {
       value = parseFloat(value);
     }

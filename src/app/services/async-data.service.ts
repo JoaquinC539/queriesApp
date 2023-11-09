@@ -19,7 +19,7 @@ interface PaginatorData{
   providedIn: 'root'
 })
 export class AsyncDataService {
-  public emitterDataList=new EventEmitter<any>();
+  public emitterDataList=new EventEmitter<StoreList>();
   public changeEmitter=new EventEmitter<boolean>();
   public destroy$=new Subject<void>()
   public filterEmitter=new EventEmitter<boolean>();
