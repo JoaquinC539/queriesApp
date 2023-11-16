@@ -36,5 +36,8 @@ export class FormatterService {
     results=value? "Activo":"Inactivo"
     return results
   }
+  public accionesEdit(link:string,id:string):string{
+    return '<i class="fa fa-pencil font-custom"></i>';
+  }
   
 }

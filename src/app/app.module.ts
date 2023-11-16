@@ -6,7 +6,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { FileSaverModule } from 'ngx-filesaver';
 import { NgxPaginationModule } from 'ngx-pagination';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 
 
@@ -14,9 +15,6 @@ import { NgxPaginationModule } from 'ngx-pagination';
   declarations: [
     AppComponent,
     routingComponents,
-    
-
-   
 
   ],
   imports: [
@@ -26,7 +24,9 @@ import { NgxPaginationModule } from 'ngx-pagination';
     FormsModule,
     FileSaverModule,
     ReactiveFormsModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    BrowserAnimationsModule,
+    MatTooltipModule
 
   ],
   // exports:[

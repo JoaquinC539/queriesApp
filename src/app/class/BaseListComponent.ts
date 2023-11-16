@@ -3,37 +3,44 @@ import { FormGroup } from "@angular/forms";
 import { Observable, takeUntil } from "rxjs";
 import { RequestService } from "../services/request.service";
 import { AsyncDataService } from "../services/async-data.service";
-import { FormatterService } from "../services/formatter.service";
-import { StoreService } from "../services/store.service";
+import { Action, IColumnMap, StoreService } from "../services/store.service";
 import { TitleService } from "../services/title-service.service";
+import { Subject } from 'rxjs';
+
+export interface BaseListComponent{
+    actions?:Action[];
+}
 
 @Component({
     template:''
 })
 export abstract class BaseListComponent implements OnInit,OnDestroy{
     public abstract endpoint:string;
-    public abstract columnMap:{[key:string]:string};
+    public abstract columnMap:IColumnMap;
     public abstract filters:FormGroup;
     public abstract titles:{title:string,link:string};
-    public abstract formatters:{[key:string]:Function}
+    public abstract formatters:{[key:string]:Function};
+    private destroy$=new Subject<void>()
     
     public params: { [key: string]: any } = this._store.storeListData.params;
     private source: Observable<any>=new Observable();
     constructor(protected _request:RequestService,protected _data:AsyncDataService,
-        protected _store:StoreService,protected _title:TitleService){
+        protected _store:StoreService,private _title:TitleService){
     }
 
     ngOnDestroy(): void {
         this.clearParams();
-        this._data.destroy$.next();
-        this._data.destroy$.complete();
+        this.destroy$.next();
+        this.destroy$.complete();
         
     }
 
     ngOnInit(): void {
-        this._title.setTitle(this.titles.title,this.titles.link)
+        this._store.titles.title=this.titles.title;
+        this._store.titles.link=this.titles.link;
+        this._title.setTitle()
         this.Fetch();
-        this._data.changeEmitter.pipe(takeUntil(this._data.destroy$)).subscribe((change:boolean)=>{
+        this._data.changeEmitter.pipe(takeUntil(this.destroy$)).subscribe((change:boolean)=>{
             if(change){
                 this.Fetch();
             }
@@ -42,13 +49,16 @@ export abstract class BaseListComponent implements OnInit,OnDestroy{
 
     public async Fetch(){
         this.source = this._request.index(this.endpoint, this._store.storeListData.params);
-        this.source.pipe(takeUntil(this._data.destroy$)).subscribe((data)=>{
+        this.source.pipe(takeUntil(this.destroy$)).subscribe((data)=>{
             const results = data[0].results ? data[0].results : [];
             const count = data[0].count[0] ? data[0].count[0].count : 0;
             this._store.storeListData = {
                 columnMap: this.columnMap, data: results, count: count, params: this.params,
                 formatter: this.formatters,endpoint:this.endpoint
             };
+            if(this.actions){
+                this._store.storeListData['actions']=this.actions
+            }
             this._data.passListAsyncData(this._store.storeListData);
         });
     }

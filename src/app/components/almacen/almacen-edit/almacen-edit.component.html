@@ -1,0 +1,66 @@
+<div class="content-wrapper">
+    <div class="content-header row">
+        <div class="content-header-left col-md-6 col-12 mb-2">
+            <h3 class="mb-0 d-inline-block pl-1">Editar Almacén</h3>
+        </div>
+    </div>
+    <div *ngIf="_store.error.active" class="content-header row">
+        <div class="col-12 bg-danger">
+            <h4 [innerHTML]="_store.error.error" class="display-5 message-header"></h4>
+        </div>
+        <div class="col-12 bg-danger" *ngIf="_store.error.type" >
+            <h4 [innerHTML]="_store.error.type" class="display-5 message-header "></h4>
+        </div>
+    </div>
+    <div *ngIf="_store.message.active" class="content-header row">
+        <div class="col-12 bg-success">
+            <h4 [innerHTML]="_store.message.message" class="display-5 message-header"></h4>
+        </div>
+        
+    </div>
+    <div class="content-body">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                  <div class="card-header">
+                    <h4>
+                        <span class="title pl-100px">Datos de Almacén</span>
+                    </h4>
+                  </div>
+                  <form [formGroup]="form">
+                    <div class="card-content collapse show">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-12 inputsForm">
+                                    <div class="row">
+                                        <div class="col-sm-12 col-md-4">
+                                            <fieldset >
+                                                <label for="nombre" class="form-label">Nombre</label><br>
+                                                <input type="text" id="nombre" formControlName="nombre" class="form-control input">
+                                            </fieldset>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 text-right mt-2 buttonsForm">
+                                    <a  (click)="submit()" style="cursor: pointer;" type="submit" class="btn btn-primary pull-right font-custom mt-1" >
+                                        <!-- <button type="button" class="btn btn-primary pull-right font-custom"> -->
+                                            <i class="fa fa-save font-custom"> <span style="font-family: sans-serif;"> Guardar</span></i>
+                                        <!-- </button> -->
+                                    </a>
+                                    <a [routerLink]="[linkCancel]" type="button" class="btn btn-danger pull-right font-custom m-1">
+                                        
+                                            <i class="fa fa-close font-custom"> <span style="font-family: sans-serif;"> Cancelar</span></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                  </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

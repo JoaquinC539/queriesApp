@@ -13,6 +13,7 @@ import { AlmacenCreateComponent } from './components/almacen/almacen-create/alma
 import { CreateButtonComponent } from './components/create-button/create-button.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { PaginationComponent } from './components/pagination/pagination.component';
+import { AlmacenEditComponent } from './components/almacen/almacen-edit/almacen-edit.component';
 
 
 
@@ -22,7 +23,8 @@ const routes: Routes = [
   {path:'facturas',component:FacturasComponent},
   {path:'almacen',component:AlmacenComponent},
   {path:'pedidos',component:PedidosComponent},
-  {path:'almacen/create',component:AlmacenCreateComponent}
+  {path:'almacen/create',component:AlmacenCreateComponent},
+  {path:'almacen/:id',component:AlmacenEditComponent}
 ];
 
 @NgModule({
@@ -32,5 +34,5 @@ const routes: Routes = [
 export class AppRoutingModule { }
 export const routingComponents:Array<any>=[DashboardComponent,FacturasComponent,
   TitleBarComponent,TableComponent,ListComponent,ExportCSVComponent,AlmacenComponent,PedidosComponent,
-  CreateButtonComponent,AlmacenCreateComponent,PaginationComponent];
+  CreateButtonComponent,AlmacenCreateComponent,PaginationComponent,AlmacenEditComponent];
 export const routingWithProviders:Array<any>=[RequestService];

@@ -31,7 +31,12 @@ html{
 .font-custom{
     font-family: sans-serif
 }
-
+.actionButton{
+    cursor: pointer;
+}
+.message-header{
+    color: #dddddd;
+}
 
 @media screen and (min-width:450px){
     // .custom-flex-paginate{
@@ -40,3 +45,6 @@ html{
     // }
 }
 
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

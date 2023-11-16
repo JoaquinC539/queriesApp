@@ -1,8 +1,9 @@
 import { Component,OnInit } from '@angular/core';
 import { FormControl,FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { BaseCreateComponent } from 'src/app/class/BaseCreateComponent';
 import { RequestService } from 'src/app/services/request.service';
+import { StoreService } from 'src/app/services/store.service';
 
 
 @Component({
@@ -10,36 +11,18 @@ import { RequestService } from 'src/app/services/request.service';
   templateUrl: './almacen-create.component.html',
   styleUrls: ['./almacen-create.component.scss']
 })
-export class AlmacenCreateComponent implements OnInit{
-  form:FormGroup;
-  response:any
-  constructor(private _request:RequestService, private router:Router){
+export class AlmacenCreateComponent extends BaseCreateComponent{
+  override form:FormGroup;
+  override endpoint: string="almacen";
+  override redirect: string='/almacen';
+  constructor( _request:RequestService,  router:Router, _store:StoreService){
+    super(_store,router,_request)
     this.form=new FormGroup({
       nombre:new FormControl('',Validators.required),
       rfc:new FormControl('',Validators.required),
       direccion:new FormControl('',Validators.required)
     })
   }
-  ngOnInit(): void {
-      
-  }
-  public onSubmit(){
-    if(this.form.valid){
-      console.log("valido: ",this.form.value)
-      const post=this._request.post('almacen',this.form.value).subscribe((response:any)=>{
-        this.response=response
-        this.router.navigate(['/almacen'])
-      },
-      (err)=>{
-        console.error(err)
-      },
-      ()=>{
-        console.log("Completa")
-      });
-      
-    }else{
-      console.log("No valido")
-      
-    }
-  }
+  
+  
 }

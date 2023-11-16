@@ -8,20 +8,27 @@
             </tr>
         </thead>
         <div *ngIf="loading; else elseBlock">
-        <div class="d-flex justify-content-center">
+            <div class="d-flex justify-content-center">
                 <div class="loader" id="loader" role="status" style="cursor:wait; " >
                     <span class= ""><i class="fa fa-refresh fa-spin"></i></span>
                 </div>
-        </div>
+            </div>
         </div>
         <ng-template #elseBlock>
             <tbody>
                 <tr *ngFor="let row of tableCellData" class="">
-                    <td *ngFor="let cell of row" class="text-truncate text-center">
-                        {{cell}}
+                    <ng-container *ngIf="actions">
+                        <td   class="text-truncate text-center" >
+                            <span *ngFor="let button of actionButtons" class="actionButton m-1 text-primary" 
+                            [innerHTML]="button.htmlTag" (click)="button.function($event,row)"
+                             matTooltip="{{button.tooltip}}"matTooltipPosition="above" ></span>
+                        </td>
+                    </ng-container>
+                    <td *ngFor="let cell of row" class="text-truncate text-center" [innerHTML]="cell" >
                     </td>
                 </tr>
             </tbody>
+           
         </ng-template>
     </table>
 </div>

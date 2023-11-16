@@ -19,7 +19,8 @@ export class ParseService {
       for(let k=0;k<objectKeys.length;k++){
         const key:string=objectKeys[k];
         const valueKey=columnsMap[key];
-        let value:string | number | boolean=data[i][valueKey]!==undefined ? data[i][valueKey]:columnsMap[key];
+        let value:string | number | boolean=""
+        value=data[i][valueKey]!==undefined ? data[i][valueKey]:columnsMap[key];
         if(formatter){
           if(formatter[valueKey]){
             const formatFunction=formatter[valueKey];

@@ -40,7 +40,14 @@ export class RequestService {
     }else{
       return this._http.post(`${this.url}/${route}`,data)
     }
-    
+   }
+   public get(route:string,id:string):Observable<any>{
+    return this._http.get(`${this.url}/${route}/${id}`)
+   }
+   public put(route:string,id:string,body:{[key:string]:number|boolean|string}):Observable<any>{
+    return this._http.put(`${this.url}/${route}/${id}`,body,{headers:{
+      'Content-type':'application/json'
+    }})
    }
 
 }

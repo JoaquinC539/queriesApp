@@ -1,4 +1,5 @@
 import { Component,OnInit } from '@angular/core';
+import { StoreService } from 'src/app/services/store.service';
 import { TitleService } from 'src/app/services/title-service.service';
 
 @Component({
@@ -7,8 +8,13 @@ import { TitleService } from 'src/app/services/title-service.service';
   styleUrls: ['./dashboard.component.scss']
 })
 // @Output() newItemEvent=new EventEmitter<string>()
-export class DashboardComponent {
-  constructor(private titleService:TitleService){
-    this.titleService.setTitle("Dashboard","index")
+export class DashboardComponent implements OnInit{
+  constructor(private _title:TitleService, private _store:StoreService){
+    
+  }
+  ngOnInit(): void {
+      this._store.titles.title="Dashboard";
+      this._store.titles.link="index";
+      this._title.setTitle();
   }
 }
