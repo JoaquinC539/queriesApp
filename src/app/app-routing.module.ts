@@ -14,7 +14,13 @@ import { CreateButtonComponent } from './components/create-button/create-button.
 import { ReactiveFormsModule } from '@angular/forms';
 import { PaginationComponent } from './components/pagination/pagination.component';
 import { AlmacenEditComponent } from './components/almacen/almacen-edit/almacen-edit.component';
-
+import { SubLinkComponent } from './components/sub-link/sub-link.component';
+import { ConfAutoTransporteComponent } from './components/transportes/conf-auto-transporte/conf-auto-transporte.component';
+import { AutoTransporteComponent } from './components/transportes/auto-transporte/auto-transporte.component';
+import { ConfTransporteCreateComponent } from './components/transportes/conf-auto-transporte/conf-transporte-create/conf-transporte-create.component';
+import { ConfTransporteEditComponent } from './components/transportes/conf-auto-transporte/conf-transporte-edit/conf-transporte-edit.component';
+import { AutoTransporteEditComponent } from './components/transportes/auto-transporte/auto-transporte-edit/auto-transporte-edit.component';
+import { AutoTransporteCreateComponent } from './components/transportes/auto-transporte/auto-transporte-create/auto-transporte-create.component';
 
 
 const routes: Routes = [
@@ -24,7 +30,15 @@ const routes: Routes = [
   {path:'almacen',component:AlmacenComponent},
   {path:'pedidos',component:PedidosComponent},
   {path:'almacen/create',component:AlmacenCreateComponent},
-  {path:'almacen/:id',component:AlmacenEditComponent}
+  {path:'almacen/:id',component:AlmacenEditComponent},
+  {path:'subMenu',component:SubLinkComponent},
+  {path:'confAutoTransporte',component:ConfAutoTransporteComponent},
+  {path:'confAutoTransporte/create',component:ConfTransporteCreateComponent},
+  {path:'confAutoTransporte/:id',component:ConfTransporteEditComponent},
+  {path:'autoTransporte',component:AutoTransporteComponent},
+  {path:"autoTransporte/create",component:AutoTransporteCreateComponent},
+  {path:"autoTransporte/:id",component:AutoTransporteEditComponent},
+  
 ];
 
 @NgModule({
@@ -34,5 +48,7 @@ const routes: Routes = [
 export class AppRoutingModule { }
 export const routingComponents:Array<any>=[DashboardComponent,FacturasComponent,
   TitleBarComponent,TableComponent,ListComponent,ExportCSVComponent,AlmacenComponent,PedidosComponent,
-  CreateButtonComponent,AlmacenCreateComponent,PaginationComponent,AlmacenEditComponent];
+  CreateButtonComponent,AlmacenCreateComponent,PaginationComponent,AlmacenEditComponent,SubLinkComponent,
+  ConfAutoTransporteComponent,AutoTransporteComponent,ConfTransporteCreateComponent,ConfTransporteEditComponent,AutoTransporteCreateComponent,
+  AutoTransporteEditComponent];
 export const routingWithProviders:Array<any>=[RequestService];

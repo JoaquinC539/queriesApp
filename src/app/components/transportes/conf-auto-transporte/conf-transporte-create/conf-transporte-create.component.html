@@ -1,7 +1,7 @@
 <div class="content-wrapper">
     <div class="content-header row">
         <div class="content-header-left col-md-6 col-12 mb-2">
-            <h3 class="mb-0 d-inline-block pl-1">Agregar Almacén</h3>
+            <h3 class="mb-0 d-inline-block pl-1">Agregar configuración vehicular</h3>
         </div>
     </div>
     <div class="content-body">
@@ -10,7 +10,7 @@
                 <div class="card">
                   <div class="card-header">
                     <h4>
-                        <span class="title pl-100px">Datos de Almacén</span>
+                        <span class="title pl-100px">Datos de configuración vehicular</span>
                     </h4>
                   </div>
                   <form [formGroup]="form">
@@ -28,17 +28,11 @@
 
                                         <div class="col-sm-12 col-md-4">
                                             <fieldset >
-                                                <label for="rfc" class="form-label">RFC</label><br>
-                                                <input type="text" id="rfc" formControlName="rfc" class="form-control input">
+                                                <label for="clave" class="form-label">Clave</label><br>
+                                                <input type="text" id="nombre" formControlName="clave" class="form-control input">
                                             </fieldset>
                                         </div>
 
-                                        <div class="col-sm-12 col-md-10">
-                                            <fieldset >
-                                                <label for="direccion" class="form-label">Dirección</label><br>
-                                                <textarea formControlName="direccion" id="direccion" cols="30" rows="10" class="textarea form-control"></textarea>
-                                            </fieldset>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -50,7 +44,6 @@
                                         <!-- </button> -->
                                     </a>
                                     <a (click)="onCancel()" type="button" class="btn btn-danger pull-right font-custom m-1">
-                                        
                                             <i class="fa fa-close font-custom"> <span style="font-family: sans-serif;"> Cancelar</span></i>
                                     </a>
                                 </div>

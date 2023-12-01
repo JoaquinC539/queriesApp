@@ -1,0 +1,123 @@
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            
+            <div class="card-header">
+                <app-create-button [text]="'Nuevo Auto Transporte'" [link]="'create'"/>
+            </div>
+            <div class="card-content collapse-show">
+                <div class="card-body">
+                    <div class="row">
+                        <form [formGroup]="filters">
+                            <div class="row">
+                                <div class="col-12 inputsForm">
+                                    <div class="row">
+                                        <div class="col-sm-12 col-md-4">
+                                            <fieldset>
+                                                <label for="id" class="form-label">Id</label><br>
+                                                <input type="text" id="id" formControlName="id" class="form-control input">
+                                            </fieldset>
+                                        </div>
+
+                                        <div class="col-sm-12 col-md-4">
+                                            <fieldset>
+                                                <label for="clave" class="form-label">Clave</label><br>
+                                                <input type="text" id="clave" formControlName="clave" class="form-control input">
+                                            </fieldset>
+                                        </div>
+
+                                        <div class="col-sm-12 col-md-4">
+                                            <fieldset>
+                                                <label for="nombre" class="form-label">Nombre</label><br>
+                                                <input type="text" id="nombre" formControlName="nombre" class="form-control input">
+                                            </fieldset>
+                                        </div>
+
+                                        <div class="col-sm-12 col-md-4">
+                                            <fieldset>
+                                                <label for="anioModeloVM" class="form-label">Año modelo vehicular</label><br>
+                                                <input type="text" id="anioModeloVM" formControlName="anioModeloVM" class="form-control input">
+                                            </fieldset>
+                                        </div>
+
+                                        <div class="col-sm-12 col-md-4">
+                                            <fieldset>
+                                                <label for="aseguraRespCivil" class="form-label">Aseguradora Responsabilidad Civil</label><br>
+                                                <input type="text" id="aseguraRespCivil" formControlName="aseguraRespCivil" class="form-control input">
+                                            </fieldset>
+                                        </div>
+                                        
+                                        <div class="col-sm-12 col-md-4">
+                                            <fieldset>
+                                                <label for="configVehicularInput" class="form-label">Configuración Vehicular</label><br>
+                                                <!-- <select type="text" id="configVehicular" formControlName="configVehicular" class="form-select">
+                                                    <option *ngFor="let object of configVehicular"[value]="object.value"  class="option">{{object.name}}</option>
+                                                </select> -->
+                                                <mat-select formControlName="configVehicular" class=" custom-select">
+                                                    <mat-option *ngFor="let object of configVehicular" [value]="object.value" class="option">{{object.name}}</mat-option>
+                                                </mat-select>
+                                            </fieldset>
+                                        </div>
+                                        
+                                        <div class="col-sm-12 col-md-4">
+                                            <fieldset>
+                                                <label for="numPermisoSCT" class="form-label">Numero Permiso SCT</label><br>
+                                                <input type="text" id="numPermisoSCT" formControlName="numPermisoSCT" class="form-control input">
+                                            </fieldset>
+                                        </div>
+                                        
+                                        <div class="col-sm-12 col-md-4">
+                                            <fieldset>
+                                                <label for="permSCT" class="form-label">Permiso SCT</label><br>
+                                                <input type="text" id="permSCT" formControlName="permSCT" class="form-control input">
+                                            </fieldset>
+                                        </div>
+                                        
+                                        <div class="col-sm-12 col-md-4">
+                                            <fieldset>
+                                                <label for="placaVM" class="form-label">Placa Vehicular</label><br>
+                                                <input type="text" id="placaVM" formControlName="placaVM" class="form-control input">
+                                            </fieldset>
+                                        </div>
+                                        
+                                        <div class="col-sm-12 col-md-4">
+                                            <fieldset>
+                                                <label for="polizaRespCivil" class="form-label">Poliza Responsabilidad Civil</label><br>
+                                                <input type="text" id="polizaRespCivil" formControlName="polizaRespCivil" class="form-control input">
+                                            </fieldset>
+                                        </div>
+                                        
+
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 text-right mt-2 buttonsForm">
+                                    <a (click)="filtrar()"  style="cursor: pointer;" type="submit" class="btn btn-primary pull-right font-custom mt-1" >
+                                        <!-- <button type="button" class="btn btn-primary pull-right font-custom"> -->
+                                            <i class="fa fa-search font-custom"> <span style="font-family: sans-serif;"> Filtrar</span></i>
+                                        <!-- </button> -->
+                                    </a>
+                                    <a  type="button" class="btn btn-danger pull-right font-custom m-1" (click)="removerFiltros()">
+                                        <i class="fa fa-close font-custom"> <span style="font-family: sans-serif;"> Remover Filtros</span></i>
+                                    </a>
+
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <app-list/>
+                    </div>
+                    <!-- <div class="row">
+                        <app-export-csv  />
+                    </div> -->
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

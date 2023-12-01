@@ -1,1 +1,19 @@
-<p>sub-link works!</p>
+<div class="position-absolute top-50 start-50 translate-middle w-75">
+    <div class="card w-100 h-85">
+        <div class="card-body">
+            <div class="row justify-content-center flex-wrap">
+                <div *ngFor="let link of links" class="col-sm-12 col-md-4 text-center">
+                    <span class="">
+                        <a [routerLink]="link.link">
+                            <button type="button" class="btn btn-primary font-custom staticSize m-1">
+                                <i class="fa fa-plus font-custom"> <span style="font-family: sans-serif;"> {{link.buttonText}} </span></i>
+                            </button>
+                        </a>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

@@ -37,14 +37,43 @@ html{
 .message-header{
     color: #dddddd;
 }
-
+.staticSize{
+    min-width: 5em;
+    min-height: 5em;
+    overflow: auto;
+}
 @media screen and (min-width:450px){
     // .custom-flex-paginate{
     //     display: flex;
     //     justify-self: end;
     // }
 }
-
-
+.custom-select{
+    --bs-form-select-bg-img: url(data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e);
+    line-height: 1.5;
+    color: var(--bs-body-color);
+    appearance: none;
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    background-size: 16px 12px;
+    border: 2px solid #f1f1f1;
+    border-radius: var(--bs-border-radius);
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    display: block;
+    width: 100%;
+    padding: 0.375rem 2.25rem 0.375rem 0.75rem;
+    font-size: 1rem;
+    font-weight: 400;
+}
+::ng-deep .mat-select-panel {
+    min-width: 250px; 
+  }
+  
+::ng-deep .mat-option {
+    padding: 10px 25px; 
+}
+  
+  
+  
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

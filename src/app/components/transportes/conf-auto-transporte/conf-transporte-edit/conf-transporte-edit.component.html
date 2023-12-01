@@ -1,8 +1,22 @@
 <div class="content-wrapper">
     <div class="content-header row">
         <div class="content-header-left col-md-6 col-12 mb-2">
-            <h3 class="mb-0 d-inline-block pl-1">Agregar Almacén</h3>
+            <h3 class="mb-0 d-inline-block pl-1">Editar Confgiuración de Auto Transporte</h3>
         </div>
+    </div>
+    <div *ngIf="_store.error.active" class="content-header row">
+        <div class="col-12 bg-danger">
+            <h4 [innerHTML]="_store.error.error" class="display-5 message-header"></h4>
+        </div>
+        <div class="col-12 bg-danger" *ngIf="_store.error.type" >
+            <h4 [innerHTML]="_store.error.type" class="display-5 message-header "></h4>
+        </div>
+    </div>
+    <div *ngIf="_store.message.active" class="content-header row">
+        <div class="col-12 bg-success">
+            <h4 [innerHTML]="_store.message.message" class="display-5 message-header"></h4>
+        </div>
+        
     </div>
     <div class="content-body">
         <div class="row">
@@ -10,7 +24,7 @@
                 <div class="card">
                   <div class="card-header">
                     <h4>
-                        <span class="title pl-100px">Datos de Almacén</span>
+                        <span class="title pl-100px">Datos de Configuración de Auto Transporte</span>
                     </h4>
                   </div>
                   <form [formGroup]="form">
@@ -25,26 +39,13 @@
                                                 <input type="text" id="nombre" formControlName="nombre" class="form-control input">
                                             </fieldset>
                                         </div>
-
-                                        <div class="col-sm-12 col-md-4">
-                                            <fieldset >
-                                                <label for="rfc" class="form-label">RFC</label><br>
-                                                <input type="text" id="rfc" formControlName="rfc" class="form-control input">
-                                            </fieldset>
-                                        </div>
-
-                                        <div class="col-sm-12 col-md-10">
-                                            <fieldset >
-                                                <label for="direccion" class="form-label">Dirección</label><br>
-                                                <textarea formControlName="direccion" id="direccion" cols="30" rows="10" class="textarea form-control"></textarea>
-                                            </fieldset>
-                                        </div>
+                                        
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-12 text-right mt-2 buttonsForm">
-                                    <a (click)="onSubmit()"  style="cursor: pointer;" type="submit" class="btn btn-primary pull-right font-custom mt-1" >
+                                    <a  (click)="onSubmit()" style="cursor: pointer;" type="submit" class="btn btn-primary pull-right font-custom mt-1" >
                                         <!-- <button type="button" class="btn btn-primary pull-right font-custom"> -->
                                             <i class="fa fa-save font-custom"> <span style="font-family: sans-serif;"> Guardar</span></i>
                                         <!-- </button> -->

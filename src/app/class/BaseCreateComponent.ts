@@ -13,7 +13,7 @@ export abstract class BaseCreateComponent implements OnInit,OnDestroy{
     abstract endpoint:string;
     abstract redirect:string
 
-    constructor(protected _store:StoreService,protected router:Router, protected _http:RequestService){}
+    constructor(protected _store:StoreService,protected router:Router, protected _request:RequestService){}
     private destroy$=new Subject<void>();
 
     ngOnDestroy(): void {
@@ -28,7 +28,7 @@ export abstract class BaseCreateComponent implements OnInit,OnDestroy{
 
     public onSubmit(){
         if(this.form.valid){
-          this._http.post(this.endpoint,this.form.value).subscribe((response:any)=>{
+          this._request.post(this.endpoint,this.form.value).pipe(takeUntil(this.destroy$)).subscribe((response:any)=>{
             this.router.navigate([this.redirect])
           },
           (err)=>{
@@ -42,5 +42,7 @@ export abstract class BaseCreateComponent implements OnInit,OnDestroy{
           
         }
       }
-
+    public onCancel(){
+      this.router.navigate([this.redirect])
+    }
 }

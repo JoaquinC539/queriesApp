@@ -42,16 +42,16 @@ export class TableComponent implements OnDestroy,OnInit{
     this.loading=true;
     this._data.emitterDataList
     .pipe(takeUntil(this.destroy$))
-    .subscribe((data:StoreList)=>{
+    .subscribe( async (data:StoreList)=>{
       this.loading=false;
-      this.tableColumns=Object.keys(data.columnMap)
+      this.tableColumns=Object.keys(data.columnMap);
       if(data.actions!==undefined){
         this.actions=true;
         this.tableColumns.unshift("Acciones");
         this.actionButtons=data.actions
       }
-      const parsedData:Array<any>=this._parse.parseObjectTable(data.columnMap,data.data,data.formatter);
-      this.tableCellData=parsedData;
+      const parsedData:Promise<any[]>= this._parse.parseObjectTable(data.columnMap,data.data,data.formatter);
+      this.tableCellData=await parsedData;
     });
   }
   

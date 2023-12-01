@@ -17,8 +17,8 @@ export class AlmacenComponent extends BaseListComponent {
   public endpoint: string = '/almacen';
   public columnMap: IColumnMap = {
         "ID": '_id',
-        'Clave': 'clave',
         'Nombre': 'nombre',
+        'Clave': 'clave',
         'Activo': 'activo',
   };
   public titles={title:'Almacén',link:'almacen'}
@@ -43,6 +43,9 @@ export class AlmacenComponent extends BaseListComponent {
            }
          },
       ];
+  }
+  public idName(value:string){
+    return 'true';
   }
   
 }

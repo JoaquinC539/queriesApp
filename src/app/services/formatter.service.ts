@@ -1,16 +1,24 @@
 import { Injectable } from '@angular/core';
 import { AsyncDataService } from './async-data.service';
 import { RequestService } from './request.service';
+import { lastValueFrom } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FormatterService {
+  ;
   private _store(_request: RequestService, _data: AsyncDataService, _store: any) {
     throw new Error('Method not implemented.');
   }
+  public idName:Function
 
-  constructor() { }
+  constructor(private _request: RequestService) {
+    this.idName=async(value:string)=>{
+      const data:any= await lastValueFrom(this._request.get('configTransporte',value));
+        return data["nombre"]
+    }
+   }
 
   public formatDate(date:Date | string){
     let datejs=new Date(date);

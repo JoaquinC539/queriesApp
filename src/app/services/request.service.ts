@@ -33,7 +33,7 @@ export class RequestService {
     exportURL=`${this.url}/${route}?export=true&${queryParams}`
     return exportURL
    }
-
+   
    public post(route:string,data:{[key:string]:any},options?:{[key:string]:any}):Observable<any>{
     if(options){
       return this._http.post(`${this.url}/${route}`,data,options)
@@ -41,6 +41,12 @@ export class RequestService {
       return this._http.post(`${this.url}/${route}`,data)
     }
    }
+   /**
+    * 
+    * @param route Request route without /
+    * @param id Id of get request
+    * @returns object with data corresponding to the response of the request
+    */
    public get(route:string,id:string):Observable<any>{
     return this._http.get(`${this.url}/${route}/${id}`)
    }

@@ -1,9 +1,14 @@
 import { Injectable } from '@angular/core';
+import { subMenuData } from '../components/sub-link/sub-link.component';
 
 interface Object{
   [key:string]:any
 }
 interface Params{
+  [key:string]:any;
+}
+
+export interface StoreService{
   [key:string]:any;
 }
 
@@ -50,8 +55,10 @@ export interface Message{
 
 }
 
-
-
+export interface SelectOptions{
+  value:string,
+  name:string
+}
 @Injectable({
   providedIn: 'root'
 })
@@ -76,12 +83,29 @@ export class StoreService {
     active:false,
     message:''
   }
+  public subMenuGeneralData:subMenuData={
+    title:'',
+    link:'',
+    links:[]
+  }
+  public autoTranpsorteSubMenu:subMenuData={
+    title:'AutoTransportes',
+    link:'/subMenu',
+    links:[{link:'/confAutoTransporte',buttonText:'Ir a Configuración de AutoTransportes'},{link:'/autoTransporte',buttonText:'Ir a AutoTransportes'}]
+  }
   public  clearEM():void{
     this.error.active=false;
     this.error.error='';
     this.error.type='';
     this.message.active=false;
     this.message.message='';
+  }
+  public getSubMenuData(reference:string):subMenuData{
+    const data:subMenuData=this[reference];
+    this.subMenuGeneralData=data;
+    this.titles.title=data.title;
+    this.titles.link=data.link;
+    return  this.subMenuGeneralData;
   }
   
 

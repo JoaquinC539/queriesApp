@@ -50,8 +50,15 @@ export abstract class BaseListComponent implements OnInit,OnDestroy{
     public async Fetch(){
         this.source = this._request.index(this.endpoint, this._store.storeListData.params);
         this.source.pipe(takeUntil(this.destroy$)).subscribe((data)=>{
-            const results = data[0].results ? data[0].results : [];
-            const count = data[0].count[0] ? data[0].count[0].count : 0;
+            let results;
+            let count;
+            if(data===undefined){
+                results=[];
+                count=[]
+            }else{
+                results = data[0].results ? data[0].results : [];
+                count = data[0].count[0] ? data[0].count[0].count : 0;
+            }
             this._store.storeListData = {
                 columnMap: this.columnMap, data: results, count: count, params: this.params,
                 formatter: this.formatters,endpoint:this.endpoint

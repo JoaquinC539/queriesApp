@@ -6,24 +6,22 @@ import { RequestService } from 'src/app/services/request.service';
 import { StoreService } from 'src/app/services/store.service';
 
 @Component({
-  selector: 'app-almacen-edit',
-  templateUrl: './almacen-edit.component.html',
-  styleUrls: ['./almacen-edit.component.scss']
+  selector: 'app-conf-transporte-edit',
+  templateUrl: './conf-transporte-edit.component.html',
+  styleUrls: ['./conf-transporte-edit.component.scss']
 })
-export class AlmacenEditComponent  extends BaseEditComponent {
-  override id:string='';
-  override endpointGet: string="/almacen";
-  override linkCancel: string="/almacen";
-  override endpointPut: string="/almacen";
-  form:FormGroup=new FormGroup({
-    nombre:new FormControl('',Validators.required)
-  });
+export class ConfTransporteEditComponent extends BaseEditComponent {
+  override id: string='';
+  override form: FormGroup<any>;
+  override endpointGet: string='/configTransporte';
+  override linkCancel: string='/confAutoTransporte';
+  override endpointPut: string='/configTransporte';
 
   constructor( _store:StoreService,route:ActivatedRoute,_request:RequestService,_router:Router){
     super(_store,route,_request,_router)
+    this.form=new FormGroup({
+      nombre:new FormControl('',Validators.required)
+    })
   }
-  
-
-  
 
 }
